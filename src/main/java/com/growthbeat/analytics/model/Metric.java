@@ -50,10 +50,9 @@ public class Metric {
 		return JsonUtils.deserialize(json, Metric.class);
 	}
 
-	public static Metric delete(String metricId, Context context) {
+	public static void delete(String metricId, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		String json = context.getGrowthbeatHttpClient().delete("/1/metrics/" + metricId, params);
-		return JsonUtils.deserialize(json, Metric.class);
+		context.getGrowthbeatHttpClient().delete("/1/metrics/" + metricId, params);
 	}
 
 	public String getId() {

@@ -47,10 +47,9 @@ public class Tag {
 		return JsonUtils.deserialize(json, Tag.class);
 	}
 
-	public static Tag delete(String tagId, Context context) {
+	public static void delete(String tagId, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		String json = context.getGrowthbeatHttpClient().delete("/1/tags/" + tagId, params);
-		return JsonUtils.deserialize(json, Tag.class);
+		context.getGrowthbeatHttpClient().delete("/1/tags/" + tagId, params);
 	}
 
 	public String getId() {

@@ -47,10 +47,9 @@ public class Event {
 		return JsonUtils.deserialize(json, Event.class);
 	}
 
-	public static Event delete(String eventId, Context context) {
+	public static void delete(String eventId, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		String json = context.getGrowthbeatHttpClient().delete("/1/events/" + eventId, params);
-		return JsonUtils.deserialize(json, Event.class);
+		context.getGrowthbeatHttpClient().delete("/1/events/" + eventId, params);
 	}
 
 	public String getId() {
