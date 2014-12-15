@@ -17,4 +17,12 @@ public class GrowthAnalytics {
 		context.setCredentialId(credentialId);
 	}
 
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
 }
