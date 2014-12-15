@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.Event;
+import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Tag;
 
 public class GrowthAnalytics {
@@ -33,7 +34,7 @@ public class GrowthAnalytics {
 		return Event.findById(id, context);
 	}
 
-	public List<Event> findEventByApplicationId(String applicationId) {
+	public List<Event> findEventsByApplicationId(String applicationId) {
 		return Event.findByApplicationId(applicationId, context);
 	}
 
@@ -53,7 +54,7 @@ public class GrowthAnalytics {
 		return Tag.findById(id, context);
 	}
 
-	public List<Tag> findTagByApplicationId(String applicationId) {
+	public List<Tag> findTagsByApplicationId(String applicationId) {
 		return Tag.findByApplicationId(applicationId, context);
 	}
 
@@ -67,6 +68,28 @@ public class GrowthAnalytics {
 
 	public void deleteTag(String tagId) {
 		Tag.delete(tagId, context);
+	}
+
+	// TODO Semgnet API
+
+	public Metric findMetricById(String id) {
+		return Metric.findById(id, context);
+	}
+
+	public List<Metric> findMetricsByParentMetricId(String parentMetricId, Integer depth) {
+		return Metric.findByParentMetricId(parentMetricId, depth, context);
+	}
+
+	public Metric createMetric(String parentMetricId, String name, String description, String query) {
+		return Metric.create(parentMetricId, name, description, query, context);
+	}
+
+	public Metric updateMetric(String metricId, String description, String query) {
+		return Metric.update(metricId, description, query, context);
+	}
+
+	public void deleteMetric(String metricId) {
+		Metric.delete(metricId, context);
 	}
 
 }
