@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.Event;
+import com.growthbeat.analytics.model.Tag;
 
 public class GrowthAnalytics {
 
@@ -28,24 +29,44 @@ public class GrowthAnalytics {
 		this.context = context;
 	}
 
-	public Event findById(String id) {
+	public Event findEventById(String id) {
 		return Event.findById(id, context);
 	}
 
-	public List<Event> findByApplicationId(String applicationId) {
+	public List<Event> findEventByApplicationId(String applicationId) {
 		return Event.findByApplicationId(applicationId, context);
 	}
 
-	public Event create(String parentEventId, String applicationId, String name, String description) {
+	public Event createEvent(String parentEventId, String applicationId, String name, String description) {
 		return Event.create(parentEventId, applicationId, name, description, context);
 	}
 
-	public Event update(String eventId, String description) {
+	public Event updateEvent(String eventId, String description) {
 		return Event.update(eventId, description, context);
 	}
 
-	public void delete(String eventId) {
+	public void deleteEvent(String eventId) {
 		Event.delete(eventId, context);
+	}
+
+	public Tag findTagById(String id) {
+		return Tag.findById(id, context);
+	}
+
+	public List<Tag> findTagByApplicationId(String applicationId) {
+		return Tag.findByApplicationId(applicationId, context);
+	}
+
+	public Tag createTag(String parentTagId, String applicationId, String name, String description) {
+		return Tag.create(parentTagId, applicationId, name, description, context);
+	}
+
+	public Tag updateTag(String tagId, String description) {
+		return Tag.update(tagId, description, context);
+	}
+
+	public void deleteTag(String tagId) {
+		Tag.delete(tagId, context);
 	}
 
 }
