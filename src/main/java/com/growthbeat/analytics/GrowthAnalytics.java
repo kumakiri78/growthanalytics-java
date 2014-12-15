@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.ClientEvent;
+import com.growthbeat.analytics.model.ClientTag;
 import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Tag;
@@ -109,6 +110,22 @@ public class GrowthAnalytics {
 
 	public ClientEvent createClientEvent(String clientId, String eventId, Map<String, String> properties) {
 		return ClientEvent.create(clientId, eventId, properties, context);
+	}
+
+	public ClientTag findClientTagByClientIdAndTagId(String clientId, String tagId) {
+		return ClientTag.findByClientIdAndTagId(clientId, tagId, context);
+	}
+
+	public List<ClientTag> findClientTagsByClientId(String clientId) {
+		return ClientTag.findByClientId(clientId, context);
+	}
+
+	public List<ClientTag> findClientTagsByTagId(String tagId) {
+		return ClientTag.findByTagId(tagId, context);
+	}
+
+	public ClientTag createClientTag(String clientId, String tagId, String value) {
+		return ClientTag.create(clientId, tagId, value, context);
 	}
 
 }
