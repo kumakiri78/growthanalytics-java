@@ -9,6 +9,7 @@ import com.growthbeat.analytics.model.ClientEvent;
 import com.growthbeat.analytics.model.ClientTag;
 import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
+import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
 
 public class GrowthAnalytics {
@@ -74,7 +75,25 @@ public class GrowthAnalytics {
 		Tag.delete(tagId, context);
 	}
 
-	// TODO Semgnet API
+	public Segment findById(String id) {
+		return Segment.findById(id, context);
+	}
+
+	public List<Segment> findByParentSegmentId(String parentSegmentId, Integer depth) {
+		return Segment.findByParentSegmentId(parentSegmentId, depth, context);
+	}
+
+	public Segment create(String parentSegmentId, String name, String description, String query) {
+		return Segment.create(parentSegmentId, name, description, query, context);
+	}
+
+	public Segment update(String segmentId, String description, String query) {
+		return Segment.update(segmentId, description, query, context);
+	}
+
+	public void delete(String segmentId) {
+		Segment.delete(segmentId, context);
+	}
 
 	public Metric findMetricById(String id) {
 		return Metric.findById(id, context);
