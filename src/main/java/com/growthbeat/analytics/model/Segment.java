@@ -1,6 +1,14 @@
 package com.growthbeat.analytics.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.codehaus.jackson.type.TypeReference;
+
+import com.growthbeat.Context;
+import com.growthbeat.http.JsonUtils;
 
 public class Segment {
 
@@ -10,6 +18,44 @@ public class Segment {
 	private String description;
 	private String query;
 	private Date created;
+
+	public static Segment findById(String id, Context context) {
+		String json = context.getGrowthbeatHttpClient().get("/1/segments/" + id, new HashMap<String, Object>());
+		return JsonUtils.deserialize(json, Segment.class);
+	}
+
+	public static List<Segment> findByParentSegmentId(String parentSegmentId, Integer depth, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("parentSegmentId", parentSegmentId);
+		if (depth != null)
+			params.put("depth", depth);
+		String json = context.getGrowthbeatHttpClient().get("/1/segments", params);
+		return JsonUtils.deserialize(json, new TypeReference<List<Segment>>() {
+		});
+	}
+
+	public static Segment create(String parentSegmentId, String name, String description, String query, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("parentSegmentId", parentSegmentId);
+		params.put("name", name);
+		params.put("description", description);
+		params.put("query", query);
+		String json = context.getGrowthbeatHttpClient().post("/1/segments", params);
+		return JsonUtils.deserialize(json, Segment.class);
+	}
+
+	public static Segment update(String segmentId, String description, String query, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("description", description);
+		params.put("query", query);
+		String json = context.getGrowthbeatHttpClient().put("/1/segments/" + segmentId, params);
+		return JsonUtils.deserialize(json, Segment.class);
+	}
+
+	public static void delete(String segmentId, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		context.getGrowthbeatHttpClient().delete("/1/segments/" + segmentId, params);
+	}
 
 	public String getId() {
 		return id;
