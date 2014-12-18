@@ -14,7 +14,7 @@ import com.growthbeat.analytics.model.Tag;
 
 public class GrowthAnalytics {
 
-	private final String BASE_URL = "https://api.analytics.growthbeat.com";
+	private static final String BASE_URL = "https://api.analytics.growthbeat.com";
 	private Context context = new Context();
 
 	public GrowthAnalytics() {
