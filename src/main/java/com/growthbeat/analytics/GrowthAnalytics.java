@@ -11,6 +11,7 @@ import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
+import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
 
@@ -39,20 +40,16 @@ public class GrowthAnalytics {
 		return Event.findById(id, context);
 	}
 
-	public List<Event> findEventsByApplicationId(String applicationId) {
-		return Event.findByApplicationId(applicationId, context);
+	public List<Event> findEventsByParentEventId(String parentEventId, Order order, Integer page, Integer limit) {
+		return Event.findByParentEventId(parentEventId, order, page, limit, context);
 	}
 
-	public Event createEvent(String parentEventId, String applicationId, String name, String description) {
-		return Event.create(parentEventId, applicationId, name, description, context);
+	public Event updateEvent(String id, String name, String description) {
+		return Event.update(id, name, description, context);
 	}
 
-	public Event updateEvent(String eventId, String description) {
-		return Event.update(eventId, description, context);
-	}
-
-	public void deleteEvent(String eventId) {
-		Event.delete(eventId, context);
+	public void deleteEventById(String id) {
+		Event.deleteById(id, context);
 	}
 
 	public Tag findTagById(String id) {
