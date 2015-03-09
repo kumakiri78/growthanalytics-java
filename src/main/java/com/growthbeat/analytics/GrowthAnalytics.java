@@ -109,18 +109,6 @@ public class GrowthAnalytics {
 		return ClientEvent.create(clientId, eventId, properties, context);
 	}
 
-	public ClientTag findClientTagByClientIdAndTagId(String clientId, String tagId) {
-		return ClientTag.findByClientIdAndTagId(clientId, tagId, context);
-	}
-
-	public List<ClientTag> findClientTagsByClientId(String clientId) {
-		return ClientTag.findByClientId(clientId, context);
-	}
-
-	public List<ClientTag> findClientTagsByTagId(String tagId) {
-		return ClientTag.findByTagId(tagId, context);
-	}
-
 	public ClientTag createClientTag(String clientId, String tagId, String value) {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
