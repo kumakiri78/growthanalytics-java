@@ -100,16 +100,9 @@ public class GrowthAnalytics {
 		Metric.deleteById(id, context);
 	}
 
-	public ClientEvent findClientEventById(String id) {
-		return ClientEvent.findById(id, context);
-	}
-
-	public List<ClientEvent> findClientEventsByClientId(String clientId, Date from, Date to) {
-		return ClientEvent.findByClientId(clientId, from, to, context);
-	}
-
-	public List<ClientEvent> findClientEventsByEventId(String eventId, Date from, Date to) {
-		return ClientEvent.findByEventId(eventId, from, to, context);
+	public List<ClientEvent> findClientEventsByClientIdAndEventId(String clientId, String eventId, Date begin, Date end,
+			String exclusiveId, Order order, Integer limit) {
+		return ClientEvent.findByClientIdAndEventId(clientId, eventId, begin, end, exclusiveId, order, limit, context);
 	}
 
 	public ClientEvent createClientEvent(String clientId, String eventId, Map<String, String> properties) {

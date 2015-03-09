@@ -9,6 +9,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
 import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Order;
 
 public class ClientEvent {
 
@@ -18,26 +19,19 @@ public class ClientEvent {
 	private Map<String, String> properties;
 	private Date created;
 
-	public static ClientEvent findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/client_events/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, ClientEvent.class);
-	}
-
-	public static List<ClientEvent> findByClientId(String clientId, Date from, Date to, Context context) {
+	public static List<ClientEvent> findByClientIdAndEventId(String clientId, String eventId, Date begin, Date end, String exclusiveId,
+			Order order, Integer limit, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
-		params.put("from", from);
-		params.put("to", to);
-		String json = context.getGrowthbeatHttpClient().get("/1/client_events", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<ClientEvent>>() {
-		});
-	}
-
-	public static List<ClientEvent> findByEventId(String eventId, Date from, Date to, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("eventId", eventId);
-		params.put("from", from);
-		params.put("to", to);
+		params.put("begin", begin);
+		params.put("end", end);
+		if (exclusiveId != null)
+			params.put("exclusiveId", exclusiveId);
+		if (order != null)
+			params.put("order", order);
+		if (limit != null)
+			params.put("limit", limit);
 		String json = context.getGrowthbeatHttpClient().get("/1/client_events", params);
 		return JsonUtils.deserialize(json, new TypeReference<List<ClientEvent>>() {
 		});
@@ -47,7 +41,11 @@ public class ClientEvent {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
 		params.put("eventId", eventId);
-		params.put("properties", properties.toString());
+		if (properties != null) {
+			for (Map.Entry<String, String> entry : properties.entrySet()) {
+				params.put(String.format("properties[%s]", entry.getKey()), entry.getValue());
+			}
+		}
 		String json = context.getGrowthbeatHttpClient().post("/1/client_events", params);
 		return JsonUtils.deserialize(json, ClientEvent.class);
 	}
