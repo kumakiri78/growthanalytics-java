@@ -88,20 +88,16 @@ public class GrowthAnalytics {
 		return Metric.findById(id, context);
 	}
 
-	public List<Metric> findMetricsByParentMetricId(String parentMetricId, Integer depth) {
-		return Metric.findByParentMetricId(parentMetricId, depth, context);
+	public List<Metric> findMetricsByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit) {
+		return Metric.findByParentMetricId(parentMetricId, order, page, limit, context);
 	}
 
-	public Metric createMetric(String parentMetricId, String name, String description, String query) {
-		return Metric.create(parentMetricId, name, description, query, context);
+	public Metric updateMetric(String id, String name, String description, String query, Integer color) {
+		return Metric.update(id, name, description, query, color, context);
 	}
 
-	public Metric updateMetric(String metricId, String description, String query) {
-		return Metric.update(metricId, description, query, context);
-	}
-
-	public void deleteMetric(String metricId) {
-		Metric.delete(metricId, context);
+	public void deleteMetricById(String id) {
+		Metric.deleteById(id, context);
 	}
 
 	public ClientEvent findClientEventById(String id) {

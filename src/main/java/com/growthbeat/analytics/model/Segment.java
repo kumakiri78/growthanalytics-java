@@ -42,7 +42,8 @@ public class Segment {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
-		params.put("query", query);
+		if (query != null)
+			params.put("query", query);
 		String json = context.getGrowthbeatHttpClient().put("/1/segments/" + id, params);
 		return JsonUtils.deserialize(json, Segment.class);
 	}
