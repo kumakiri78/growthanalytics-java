@@ -56,20 +56,16 @@ public class GrowthAnalytics {
 		return Tag.findById(id, context);
 	}
 
-	public List<Tag> findTagsByApplicationId(String applicationId) {
-		return Tag.findByApplicationId(applicationId, context);
+	public List<Tag> findTagsByParentTagId(String parentTagId, Order order, Integer page, Integer limit) {
+		return Tag.findByParentTagId(parentTagId, order, page, limit, context);
 	}
 
-	public Tag createTag(String parentTagId, String applicationId, String name, String description) {
-		return Tag.create(parentTagId, applicationId, name, description, context);
+	public Tag updateTag(String id, String name, String description) {
+		return Tag.update(id, name, description, context);
 	}
 
-	public Tag updateTag(String tagId, String description) {
-		return Tag.update(tagId, description, context);
-	}
-
-	public void deleteTag(String tagId) {
-		Tag.delete(tagId, context);
+	public void deleteTagById(String id) {
+		Tag.deleteById(id, context);
 	}
 
 	public Segment findById(String id) {

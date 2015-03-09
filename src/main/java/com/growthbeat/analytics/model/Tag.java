@@ -9,11 +9,12 @@ import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
 import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Order;
 
 public class Tag {
 
 	private String id;
-	private String applicationId;
+	private String name;
 	private String description;
 	private Date created;
 
@@ -22,34 +23,31 @@ public class Tag {
 		return JsonUtils.deserialize(json, Tag.class);
 	}
 
-	public static List<Tag> findByApplicationId(String applicationId, Context context) {
+	public static List<Tag> findByParentTagId(String parentTagId, Order order, Integer page, Integer limit, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("applicationId", applicationId);
-		String json = context.getGrowthbeatHttpClient().get("/1/tags/", params);
+		params.put("parentTagId", parentTagId);
+		if (order != null)
+			params.put("order", order.toString());
+		if (page != null)
+			params.put("page", page);
+		if (limit != null)
+			params.put("limit", limit);
+		String json = context.getGrowthbeatHttpClient().get("/1/tags", params);
 		return JsonUtils.deserialize(json, new TypeReference<List<Tag>>() {
 		});
 	}
 
-	public static Tag create(String parentTagId, String applicationId, String name, String description, Context context) {
+	public static Tag update(String id, String name, String description, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("applicationId", applicationId);
-		params.put("parentTagId", parentTagId);
 		params.put("name", name);
 		params.put("description", description);
-		String json = context.getGrowthbeatHttpClient().post("/1/tags", params);
+		String json = context.getGrowthbeatHttpClient().put("/1/tags/" + id, params);
 		return JsonUtils.deserialize(json, Tag.class);
 	}
 
-	public static Tag update(String tagId, String description, Context context) {
+	public static void deleteById(String id, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("description", description);
-		String json = context.getGrowthbeatHttpClient().put("/1/tags/" + tagId, params);
-		return JsonUtils.deserialize(json, Tag.class);
-	}
-
-	public static void delete(String tagId, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/tags/" + tagId, params);
+		context.getGrowthbeatHttpClient().delete("/1/tags/" + id, params);
 	}
 
 	public String getId() {
@@ -60,12 +58,12 @@ public class Tag {
 		this.id = id;
 	}
 
-	public String getApplicationId() {
-		return applicationId;
+	public String getName() {
+		return name;
 	}
 
-	public void setApplicationId(String applicationId) {
-		this.applicationId = applicationId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
