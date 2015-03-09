@@ -68,24 +68,20 @@ public class GrowthAnalytics {
 		Tag.deleteById(id, context);
 	}
 
-	public Segment findById(String id) {
+	public Segment findSegmentById(String id) {
 		return Segment.findById(id, context);
 	}
 
-	public List<Segment> findByParentSegmentId(String parentSegmentId, Integer depth) {
-		return Segment.findByParentSegmentId(parentSegmentId, depth, context);
+	public List<Segment> findSegmentsByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit) {
+		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, context);
 	}
 
-	public Segment create(String parentSegmentId, String name, String description, String query) {
-		return Segment.create(parentSegmentId, name, description, query, context);
+	public Segment updateSegment(String id, String name, String description, String query) {
+		return Segment.update(id, name, description, query, context);
 	}
 
-	public Segment update(String segmentId, String description, String query) {
-		return Segment.update(segmentId, description, query, context);
-	}
-
-	public void delete(String segmentId) {
-		Segment.delete(segmentId, context);
+	public void deleteSegmentById(String id) {
+		Segment.deleteById(id, context);
 	}
 
 	public Metric findMetricById(String id) {
