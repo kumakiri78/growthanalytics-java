@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.growthbeat.analytics</groupId>
 	<artifactId>growthanalytics-java</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.0</version>
 
 	<properties>
 		<github.global.server>github</github.global.server>
@@ -17,7 +17,7 @@
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 	</distributionManagement>
-	
+
 	<repositories>
 		<repository>
 			<id>growthbeat-java-github</id>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>com.growthbeat</groupId>
 			<artifactId>growthbeat-java</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -81,6 +81,7 @@
 					</includes>
 					<repositoryName>${repositoryName}</repositoryName>
 					<repositoryOwner>SIROK</repositoryOwner>
+					<merge>true</merge>
 				</configuration>
 				<executions>
 					<execution>

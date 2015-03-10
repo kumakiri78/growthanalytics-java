@@ -8,53 +8,45 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
+import com.growthbeat.model.Order;
 
-public class Segment {
+public class Segment extends Model {
 
 	private String id;
-	private String originId;
-	private String originName;
+	private String name;
 	private String description;
 	private String query;
 	private Date created;
 
 	public static Segment findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/segments/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, Segment.class);
+		return get(context, "/1/segments/" + id, new HashMap<String, Object>(), Segment.class);
 	}
 
-	public static List<Segment> findByParentSegmentId(String parentSegmentId, Integer depth, Context context) {
+	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentSegmentId", parentSegmentId);
-		if (depth != null)
-			params.put("depth", depth);
-		String json = context.getGrowthbeatHttpClient().get("/1/segments", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<Segment>>() {
+		if (order != null)
+			params.put("order", order.toString());
+		if (page != null)
+			params.put("page", page);
+		if (limit != null)
+			params.put("limit", limit);
+		return get(context, "/1/segments", params, new TypeReference<List<Segment>>() {
 		});
 	}
 
-	public static Segment create(String parentSegmentId, String name, String description, String query, Context context) {
+	public static Segment update(String id, String name, String description, String query, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("parentSegmentId", parentSegmentId);
 		params.put("name", name);
 		params.put("description", description);
-		params.put("query", query);
-		String json = context.getGrowthbeatHttpClient().post("/1/segments", params);
-		return JsonUtils.deserialize(json, Segment.class);
+		if (query != null)
+			params.put("query", query);
+		return put(context, "/1/segments/" + id, params, Segment.class);
 	}
 
-	public static Segment update(String segmentId, String description, String query, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("description", description);
-		params.put("query", query);
-		String json = context.getGrowthbeatHttpClient().put("/1/segments/" + segmentId, params);
-		return JsonUtils.deserialize(json, Segment.class);
-	}
-
-	public static void delete(String segmentId, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/segments/" + segmentId, params);
+	public static void deleteById(String id, Context context) {
+		delete(context, "/1/segments/" + id, new HashMap<String, Object>(), Void.class);
 	}
 
 	public String getId() {
@@ -65,20 +57,12 @@ public class Segment {
 		this.id = id;
 	}
 
-	public String getOriginId() {
-		return originId;
+	public String getName() {
+		return name;
 	}
 
-	public void setOriginId(String originId) {
-		this.originId = originId;
-	}
-
-	public String getOriginName() {
-		return originName;
-	}
-
-	public void setOriginName(String originName) {
-		this.originName = originName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
