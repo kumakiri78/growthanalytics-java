@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 
-public class ClientSegment {
+public class ClientSegment extends Model {
 
 	private String clientId;
 	private String segmentId;
@@ -15,8 +15,7 @@ public class ClientSegment {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
 		params.put("segmentId", segmentId);
-		String json = context.getGrowthbeatHttpClient().get("/1/client_segments", params);
-		return JsonUtils.deserialize(json, ClientSegment.class);
+		return get(context, "/1/client_segments", params, ClientSegment.class);
 	}
 
 	public String getClientId() {

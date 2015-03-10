@@ -8,10 +8,10 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
-public class Metric {
+public class Metric extends Model {
 
 	private String id;
 	private String name;
@@ -21,8 +21,7 @@ public class Metric {
 	private Date created;
 
 	public static Metric findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/metrics/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, Metric.class);
+		return get(context, "/1/metrics/" + id, new HashMap<String, Object>(), Metric.class);
 	}
 
 	public static List<Metric> findByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit, Context context) {
@@ -34,8 +33,7 @@ public class Metric {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
-		String json = context.getGrowthbeatHttpClient().get("/1/metrics", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<Metric>>() {
+		return get(context, "/1/metrics", params, new TypeReference<List<Metric>>() {
 		});
 	}
 
@@ -47,13 +45,11 @@ public class Metric {
 			params.put("query", query);
 		if (color != null)
 			params.put("color", color);
-		String json = context.getGrowthbeatHttpClient().put("/1/metrics/" + id, params);
-		return JsonUtils.deserialize(json, Metric.class);
+		return put(context, "/1/metrics/" + id, params, Metric.class);
 	}
 
 	public static void deleteById(String id, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/metrics/" + id, params);
+		delete(context, "/1/metrics/" + id, new HashMap<String, Object>(), Void.class);
 	}
 
 	public String getId() {

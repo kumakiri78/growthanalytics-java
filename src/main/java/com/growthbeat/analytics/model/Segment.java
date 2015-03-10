@@ -8,10 +8,10 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
-public class Segment {
+public class Segment extends Model {
 
 	private String id;
 	private String name;
@@ -20,8 +20,7 @@ public class Segment {
 	private Date created;
 
 	public static Segment findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/segments/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, Segment.class);
+		return get(context, "/1/segments/" + id, new HashMap<String, Object>(), Segment.class);
 	}
 
 	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Context context) {
@@ -33,8 +32,7 @@ public class Segment {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
-		String json = context.getGrowthbeatHttpClient().get("/1/segments", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<Segment>>() {
+		return get(context, "/1/segments", params, new TypeReference<List<Segment>>() {
 		});
 	}
 
@@ -44,13 +42,11 @@ public class Segment {
 		params.put("description", description);
 		if (query != null)
 			params.put("query", query);
-		String json = context.getGrowthbeatHttpClient().put("/1/segments/" + id, params);
-		return JsonUtils.deserialize(json, Segment.class);
+		return put(context, "/1/segments/" + id, params, Segment.class);
 	}
 
 	public static void deleteById(String id, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/segments/" + id, params);
+		delete(context, "/1/segments/" + id, new HashMap<String, Object>(), Void.class);
 	}
 
 	public String getId() {

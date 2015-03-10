@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 
-public class ClientTag {
+public class ClientTag extends Model {
 
 	private String clientId;
 	private String tagId;
@@ -20,8 +20,7 @@ public class ClientTag {
 		params.put("tagId", tagId);
 		if (value != null)
 			params.put("value", value);
-		String json = context.getGrowthbeatHttpClient().post("/1/client_tags", params);
-		return JsonUtils.deserialize(json, ClientTag.class);
+		return post(context, "/1/client_tags", params, ClientTag.class);
 	}
 
 	public String getClientId() {

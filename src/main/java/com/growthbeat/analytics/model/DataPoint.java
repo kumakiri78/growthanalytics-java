@@ -7,9 +7,9 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 
-public class DataPoint {
+public class DataPoint extends Model {
 
 	private String category;
 	private String value;
@@ -17,8 +17,7 @@ public class DataPoint {
 	public static List<DataPoint> findByDataPointQuery(String dataPointQuery, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("dataPointQuery", dataPointQuery);
-		String json = context.getGrowthbeatHttpClient().get("/1/data_points", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<DataPoint>>() {
+		return get(context, "/1/data_points", params, new TypeReference<List<DataPoint>>() {
 		});
 	}
 

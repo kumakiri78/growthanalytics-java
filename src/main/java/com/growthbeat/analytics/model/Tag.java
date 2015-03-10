@@ -8,10 +8,10 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
-public class Tag {
+public class Tag extends Model {
 
 	private String id;
 	private String name;
@@ -19,8 +19,7 @@ public class Tag {
 	private Date created;
 
 	public static Tag findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/tags/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, Tag.class);
+		return get(context, "/1/tags/" + id, new HashMap<String, Object>(), Tag.class);
 	}
 
 	public static List<Tag> findByParentTagId(String parentTagId, Order order, Integer page, Integer limit, Context context) {
@@ -32,8 +31,7 @@ public class Tag {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
-		String json = context.getGrowthbeatHttpClient().get("/1/tags", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<Tag>>() {
+		return get(context, "/1/tags", params, new TypeReference<List<Tag>>() {
 		});
 	}
 
@@ -41,13 +39,11 @@ public class Tag {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
-		String json = context.getGrowthbeatHttpClient().put("/1/tags/" + id, params);
-		return JsonUtils.deserialize(json, Tag.class);
+		return put(context, "/1/tags/" + id, params, Tag.class);
 	}
 
 	public static void deleteById(String id, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/tags/" + id, params);
+		delete(context, "/1/tags/" + id, new HashMap<String, Object>(), Void.class);
 	}
 
 	public String getId() {

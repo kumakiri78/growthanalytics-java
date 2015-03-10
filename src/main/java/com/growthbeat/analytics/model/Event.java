@@ -8,10 +8,10 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
-public class Event {
+public class Event extends Model {
 
 	private String id;
 	private String name;
@@ -19,8 +19,7 @@ public class Event {
 	private Date created;
 
 	public static Event findById(String id, Context context) {
-		String json = context.getGrowthbeatHttpClient().get("/1/events/" + id, new HashMap<String, Object>());
-		return JsonUtils.deserialize(json, Event.class);
+		return get(context, "/1/events/" + id, new HashMap<String, Object>(), Event.class);
 	}
 
 	public static List<Event> findByParentEventId(String parentEventId, Order order, Integer page, Integer limit, Context context) {
@@ -32,8 +31,7 @@ public class Event {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
-		String json = context.getGrowthbeatHttpClient().get("/1/events", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<Event>>() {
+		return get(context, "/1/events", params, new TypeReference<List<Event>>() {
 		});
 	}
 
@@ -41,13 +39,11 @@ public class Event {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
-		String json = context.getGrowthbeatHttpClient().put("/1/events/" + id, params);
-		return JsonUtils.deserialize(json, Event.class);
+		return put(context, "/1/events/" + id, params, Event.class);
 	}
 
 	public static void deleteById(String id, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		context.getGrowthbeatHttpClient().delete("/1/events/" + id, params);
+		delete(context, "/1/events/" + id, new HashMap<String, Object>(), Void.class);
 	}
 
 	public String getId() {

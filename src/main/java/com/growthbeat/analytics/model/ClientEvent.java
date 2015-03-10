@@ -8,10 +8,10 @@ import java.util.Map;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
-public class ClientEvent {
+public class ClientEvent extends Model {
 
 	private String id;
 	private String clientId;
@@ -32,8 +32,7 @@ public class ClientEvent {
 			params.put("order", order);
 		if (limit != null)
 			params.put("limit", limit);
-		String json = context.getGrowthbeatHttpClient().get("/1/client_events", params);
-		return JsonUtils.deserialize(json, new TypeReference<List<ClientEvent>>() {
+		return get(context, "/1/client_events", params, new TypeReference<List<ClientEvent>>() {
 		});
 	}
 
@@ -46,8 +45,7 @@ public class ClientEvent {
 				params.put(String.format("properties[%s]", entry.getKey()), entry.getValue());
 			}
 		}
-		String json = context.getGrowthbeatHttpClient().post("/1/client_events", params);
-		return JsonUtils.deserialize(json, ClientEvent.class);
+		return post(context, "/1/client_events", params, ClientEvent.class);
 	}
 
 	public String getId() {
