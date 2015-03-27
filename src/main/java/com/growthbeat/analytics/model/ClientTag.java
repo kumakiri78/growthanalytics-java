@@ -14,6 +14,14 @@ public class ClientTag extends Model {
 	private String value;
 	private Date updated;
 
+	public static ClientTag findByClientIdAndTagId(String clientId, String tagId, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("clientId", clientId);
+		params.put("tagId", tagId);
+
+		return get(context, "/1/client_tags", params, ClientTag.class);
+	}
+
 	public static ClientTag create(String clientId, String tagId, String value, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);

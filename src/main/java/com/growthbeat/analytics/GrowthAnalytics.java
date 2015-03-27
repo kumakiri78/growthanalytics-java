@@ -51,6 +51,10 @@ public class GrowthAnalytics {
 		return ClientSegment.findByClientIdAndSegmentId(clientId, segmentId, context);
 	}
 
+	public ClientTag findByClientIdAndTagId(String clientId, String tagId) {
+		return ClientTag.findByClientIdAndTagId(clientId, tagId, context);
+	}
+
 	public ClientTag createClientTag(String clientId, String tagId, String value) {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
