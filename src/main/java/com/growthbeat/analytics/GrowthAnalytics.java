@@ -59,8 +59,8 @@ public class GrowthAnalytics {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
 
-	public List<DataPoint> findDataPointsByDataPointQuery(String dataPointQuery) {
-		return DataPoint.findByDataPointQuery(dataPointQuery, context);
+	public List<DataPoint> findDataPointsByDataPointQuery(String dataPointQuery, Date begin, Date end) {
+		return DataPoint.findByDataPointQuery(dataPointQuery, begin, end, context);
 	}
 
 	public Event findEventById(String id) {
