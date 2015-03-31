@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.client.utils.DateUtils;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.growthbeat.Context;
@@ -24,12 +25,12 @@ public class ClientEvent extends Model {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
 		params.put("eventId", eventId);
-		params.put("begin", begin);
-		params.put("end", end);
+		params.put("begin", DateUtils.formatDate(begin, ISO_8601_DATETIME_FORMAT));
+		params.put("end", DateUtils.formatDate(end, ISO_8601_DATETIME_FORMAT));
 		if (exclusiveId != null)
 			params.put("exclusiveId", exclusiveId);
 		if (order != null)
-			params.put("order", order);
+			params.put("order", order.toString());
 		if (limit != null)
 			params.put("limit", limit);
 		return get(context, "/1/client_events", params, new TypeReference<List<ClientEvent>>() {
