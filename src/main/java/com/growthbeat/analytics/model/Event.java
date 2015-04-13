@@ -22,7 +22,7 @@ public class Event extends Model {
 		return get(context, "/1/events/" + id, new HashMap<String, Object>(), Event.class);
 	}
 
-	public static List<Event> findByParentEventId(String parentEventId, Order order, Integer page, Integer limit, Context context) {
+	public static List<Event> findByParentEventId(String parentEventId, Order order, Integer page, Integer limit, Boolean onlyLeaf, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentEventId", parentEventId);
 		if (order != null)
@@ -31,6 +31,8 @@ public class Event extends Model {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
+		if (onlyLeaf != null)
+			params.put("onlyLeaf", onlyLeaf);
 		return get(context, "/1/events", params, new TypeReference<List<Event>>() {
 		});
 	}

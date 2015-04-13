@@ -63,8 +63,8 @@ public class GrowthAnalytics {
 		return Event.findById(id, context);
 	}
 
-	public List<Event> findEventsByParentEventId(String parentEventId, Order order, Integer page, Integer limit) {
-		return Event.findByParentEventId(parentEventId, order, page, limit, context);
+	public List<Event> findEventsByParentEventId(String parentEventId, Order order, Integer page, Integer limit, Boolean onlyLeaf) {
+		return Event.findByParentEventId(parentEventId, order, page, limit, onlyLeaf, context);
 	}
 
 	public Event updateEvent(String id, String name, String description) {
@@ -95,8 +95,8 @@ public class GrowthAnalytics {
 		return Segment.findById(id, context);
 	}
 
-	public List<Segment> findSegmentsByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit) {
-		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, context);
+	public List<Segment> findSegmentsByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Boolean onlyLeaf) {
+		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, onlyLeaf, context);
 	}
 
 	public Segment updateSegment(String id, String name, String description, String query) {
