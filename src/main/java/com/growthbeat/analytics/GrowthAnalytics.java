@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.growthbeat.Context;
+import com.growthbeat.analytics.model.Application;
 import com.growthbeat.analytics.model.ClientEvent;
 import com.growthbeat.analytics.model.ClientSegment;
 import com.growthbeat.analytics.model.ClientTag;
@@ -38,6 +39,10 @@ public class GrowthAnalytics {
 		this.context = context;
 	}
 
+	public com.growthbeat.model.Application initialize(String applicationId, Context context) {
+		return Application.initialize(applicationId, context);
+	}
+
 	public List<ClientEvent> findClientEventsByClientIdAndEventId(String clientId, String eventId, Date begin, Date end,
 			String exclusiveId, Order order, Integer limit) {
 		return ClientEvent.findByClientIdAndEventId(clientId, eventId, begin, end, exclusiveId, order, limit, context);
@@ -54,11 +59,11 @@ public class GrowthAnalytics {
 	public ClientTag findClientTagByClientIdAndTagId(String clientId, String tagId) {
 		return ClientTag.findByClientIdAndTagId(clientId, tagId, context);
 	}
-	
+
 	public List<ClientTag> findClientTagsByClientId(String clientId) {
 		return ClientTag.findByClientId(clientId, context);
 	}
-	
+
 	public List<ClientTag> findClientTagsByTagId(String tagId) {
 		return ClientTag.findByTagId(tagId, context);
 	}
