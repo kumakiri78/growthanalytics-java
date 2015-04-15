@@ -32,6 +32,14 @@ public class ClientTag extends Model {
 		return get(context, "/1/client_tags", params, new TypeReference<List<ClientTag>>() {
 		});
 	}
+	
+	public static List<ClientTag> findByTagId(String tagId, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("tagId", tagId);
+		
+		return get(context, "/1/client_tags", params, new TypeReference<List<ClientTag>>() {
+		});
+	}
 
 	public static ClientTag create(String clientId, String tagId, String value, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
