@@ -39,7 +39,7 @@ public class GrowthAnalytics {
 		this.context = context;
 	}
 
-	public com.growthbeat.model.Application initialize(String applicationId, Context context) {
+	public com.growthbeat.model.Application initialize(String applicationId) {
 		return Application.initialize(applicationId, context);
 	}
 
