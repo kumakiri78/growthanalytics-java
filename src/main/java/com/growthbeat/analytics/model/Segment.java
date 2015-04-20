@@ -23,7 +23,7 @@ public class Segment extends Model {
 		return get(context, "/1/segments/" + id, new HashMap<String, Object>(), Segment.class);
 	}
 
-	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Context context) {
+	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Boolean onlyLeaf, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentSegmentId", parentSegmentId);
 		if (order != null)
@@ -32,6 +32,8 @@ public class Segment extends Model {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
+		if (onlyLeaf != null)
+			params.put("onlyLeaf", onlyLeaf);
 		return get(context, "/1/segments", params, new TypeReference<List<Segment>>() {
 		});
 	}
