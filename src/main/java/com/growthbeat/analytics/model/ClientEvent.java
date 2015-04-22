@@ -9,6 +9,7 @@ import org.apache.http.client.utils.DateUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.constants.Constants;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
@@ -25,8 +26,8 @@ public class ClientEvent extends Model {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
 		params.put("eventId", eventId);
-		params.put("begin", DateUtils.formatDate(begin, ISO_8601_DATETIME_FORMAT));
-		params.put("end", DateUtils.formatDate(end, ISO_8601_DATETIME_FORMAT));
+		params.put("begin", DateUtils.formatDate(begin, Constants.ISO_8601_DATETIME_FORMAT));
+		params.put("end", DateUtils.formatDate(end, Constants.ISO_8601_DATETIME_FORMAT));
 		if (exclusiveId != null)
 			params.put("exclusiveId", exclusiveId);
 		if (order != null)
