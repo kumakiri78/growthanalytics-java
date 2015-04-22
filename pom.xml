@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.growthbeat</groupId>
 			<artifactId>growthbeat-java</artifactId>
-			<version>1.0.5</version>
+			<version>1.0.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
