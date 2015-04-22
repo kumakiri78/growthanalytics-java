@@ -2,6 +2,7 @@ package com.growthbeat.analytics.query.filter;
 
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.growthbeat.analytics.query.segment.SegmentQuery;
 
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class SegmentFilterQuery extends FilterQuery {

@@ -3,6 +3,10 @@ package com.growthbeat.analytics.query.datapoint;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.growthbeat.analytics.query.filter.FilterQuery;
+import com.growthbeat.analytics.query.metric.MetricQuery;
+import com.growthbeat.analytics.query.time.TimeQuery;
+import com.growthbeat.constants.Constants;
 
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class MetricDataPointQuery extends DataPointQuery {

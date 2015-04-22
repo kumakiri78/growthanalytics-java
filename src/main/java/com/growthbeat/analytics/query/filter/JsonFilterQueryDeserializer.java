@@ -12,7 +12,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.utils.JsonUtils;
 
 public class JsonFilterQueryDeserializer extends JsonDeserializer<FilterQuery> {
 

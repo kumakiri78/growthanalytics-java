@@ -3,6 +3,8 @@ package com.growthbeat.analytics.query.filter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.growthbeat.analytics.query.time.TimeQuery;
+import com.growthbeat.constants.Constants;
 
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class TimeFilterQuery extends FilterQuery {

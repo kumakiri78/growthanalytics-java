@@ -14,7 +14,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.growthbeat.http.JsonUtils;
+import com.growthbeat.constants.Constants;
+import com.growthbeat.utils.DateUtils;
+import com.growthbeat.utils.JsonUtils;
 
 public class JsonTimeQueryDeserializer extends JsonDeserializer<TimeQuery> {
 

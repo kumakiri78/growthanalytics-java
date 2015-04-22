@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.growthbeat.constants.Constants;
 
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class AbsoluteTimeQuery extends TimeQuery {
