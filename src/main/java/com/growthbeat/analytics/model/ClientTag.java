@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.type.TypeReference;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
 import com.growthbeat.model.Model;
 
@@ -24,19 +23,19 @@ public class ClientTag extends Model {
 
 		return get(context, "/1/client_tags", params, ClientTag.class);
 	}
-	
+
 	public static List<ClientTag> findByClientId(String clientId, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
-		
+
 		return get(context, "/1/client_tags", params, new TypeReference<List<ClientTag>>() {
 		});
 	}
-	
+
 	public static List<ClientTag> findByTagId(String tagId, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("tagId", tagId);
-		
+
 		return get(context, "/1/client_tags", params, new TypeReference<List<ClientTag>>() {
 		});
 	}
