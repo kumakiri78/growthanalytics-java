@@ -15,6 +15,7 @@ import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
 import com.growthbeat.analytics.query.datapoint.DataPointQuery;
+import com.growthbeat.analytics.query.metric.MetricQuery;
 import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
@@ -101,7 +102,7 @@ public class GrowthAnalytics {
 		return Metric.findByParentMetricId(parentMetricId, order, page, limit, context);
 	}
 
-	public Metric updateMetric(String id, String name, String description, String query, Integer color) {
+	public Metric updateMetric(String id, String name, String description, MetricQuery query, Integer color) {
 		return Metric.update(id, name, description, query, color, context);
 	}
 
