@@ -14,6 +14,7 @@ import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
+import com.growthbeat.analytics.query.datapoint.DataPointQuery;
 import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
@@ -72,7 +73,7 @@ public class GrowthAnalytics {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
 
-	public List<DataPoint> findDataPointsByDataPointQuery(String dataPointQuery, Date begin, Date end) {
+	public List<DataPoint> findDataPointsByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end) {
 		return DataPoint.findByDataPointQuery(dataPointQuery, begin, end, context);
 	}
 

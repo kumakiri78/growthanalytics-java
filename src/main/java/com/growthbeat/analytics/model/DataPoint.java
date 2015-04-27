@@ -7,18 +7,20 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.analytics.query.datapoint.DataPointQuery;
 import com.growthbeat.constants.Constants;
 import com.growthbeat.model.Model;
 import com.growthbeat.utils.DateUtils;
+import com.growthbeat.utils.JsonUtils;
 
 public class DataPoint extends Model {
 
 	private String category;
 	private String value;
 
-	public static List<DataPoint> findByDataPointQuery(String dataPointQuery, Date begin, Date end, Context context) {
+	public static List<DataPoint> findByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("dataPointQuery", dataPointQuery);
+		params.put("dataPointQuery", JsonUtils.serialize(dataPointQuery));
 		if (begin != null)
 			params.put("begin", DateUtils.dateTimeStringFromDateWithFormat(begin, Constants.ISO_8601_DATETIME_FORMAT));
 		if (end != null)
