@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.analytics.query.metric.MetricQuery;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 
@@ -15,7 +16,7 @@ public class Metric extends Model {
 	private String id;
 	private String name;
 	private String description;
-	private String query;
+	private MetricQuery query;
 	private Integer color;
 	private Date created;
 
@@ -75,11 +76,11 @@ public class Metric extends Model {
 		this.description = description;
 	}
 
-	public String getQuery() {
+	public MetricQuery getQuery() {
 		return query;
 	}
 
-	public void setQuery(String query) {
+	public void setQuery(MetricQuery query) {
 		this.query = query;
 	}
 
