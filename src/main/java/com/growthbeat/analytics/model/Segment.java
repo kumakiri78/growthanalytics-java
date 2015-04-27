@@ -10,6 +10,7 @@ import com.growthbeat.Context;
 import com.growthbeat.analytics.query.segment.SegmentQuery;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.JsonUtils;
 
 public class Segment extends Model {
 
@@ -39,12 +40,12 @@ public class Segment extends Model {
 		});
 	}
 
-	public static Segment update(String id, String name, String description, String query, Context context) {
+	public static Segment update(String id, String name, String description, SegmentQuery query, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
 		if (query != null)
-			params.put("query", query);
+			params.put("query", JsonUtils.serialize(query));
 		return put(context, "/1/segments/" + id, params, Segment.class);
 	}
 
