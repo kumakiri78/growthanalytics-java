@@ -15,6 +15,7 @@ import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
 import com.growthbeat.analytics.query.datapoint.DataPointQuery;
+import com.growthbeat.analytics.query.filter.FilterQuery;
 import com.growthbeat.analytics.query.metric.MetricQuery;
 import com.growthbeat.analytics.query.segment.SegmentQuery;
 import com.growthbeat.model.Order;
@@ -44,6 +45,11 @@ public class GrowthAnalytics {
 
 	public com.growthbeat.model.Application initialize(String applicationId) {
 		return Application.initialize(applicationId, context);
+	}
+
+	public List<ClientEvent> findClientEventsByEventId(String eventId, Date begin, Date end, String exclusiveId, Order order,
+			FilterQuery filterQuery, Integer limit) {
+		return ClientEvent.findByEventId(eventId, begin, end, exclusiveId, order, filterQuery, limit, context);
 	}
 
 	public List<ClientEvent> findClientEventsByClientIdAndEventId(String clientId, String eventId, Date begin, Date end,
