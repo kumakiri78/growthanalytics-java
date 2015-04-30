@@ -7,22 +7,25 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.analytics.query.segment.SegmentQuery;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.JsonUtils;
 
 public class Segment extends Model {
 
 	private String id;
 	private String name;
 	private String description;
-	private String query;
+	private SegmentQuery query;
 	private Date created;
 
 	public static Segment findById(String id, Context context) {
 		return get(context, "/1/segments/" + id, new HashMap<String, Object>(), Segment.class);
 	}
 
-	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Boolean onlyLeaf, Context context) {
+	public static List<Segment> findByParentSegmentId(String parentSegmentId, Order order, Integer page, Integer limit, Boolean onlyLeaf,
+			Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentSegmentId", parentSegmentId);
 		if (order != null)
@@ -37,12 +40,12 @@ public class Segment extends Model {
 		});
 	}
 
-	public static Segment update(String id, String name, String description, String query, Context context) {
+	public static Segment update(String id, String name, String description, SegmentQuery query, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
 		if (query != null)
-			params.put("query", query);
+			params.put("query", JsonUtils.serialize(query));
 		return put(context, "/1/segments/" + id, params, Segment.class);
 	}
 
@@ -74,11 +77,11 @@ public class Segment extends Model {
 		this.description = description;
 	}
 
-	public String getQuery() {
+	public SegmentQuery getQuery() {
 		return query;
 	}
 
-	public void setQuery(String query) {
+	public void setQuery(SegmentQuery query) {
 		this.query = query;
 	}
 

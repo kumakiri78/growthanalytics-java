@@ -14,6 +14,9 @@ import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
 import com.growthbeat.analytics.model.Segment;
 import com.growthbeat.analytics.model.Tag;
+import com.growthbeat.analytics.query.datapoint.DataPointQuery;
+import com.growthbeat.analytics.query.metric.MetricQuery;
+import com.growthbeat.analytics.query.segment.SegmentQuery;
 import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
@@ -72,7 +75,7 @@ public class GrowthAnalytics {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
 
-	public List<DataPoint> findDataPointsByDataPointQuery(String dataPointQuery, Date begin, Date end) {
+	public List<DataPoint> findDataPointsByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end) {
 		return DataPoint.findByDataPointQuery(dataPointQuery, begin, end, context);
 	}
 
@@ -100,7 +103,7 @@ public class GrowthAnalytics {
 		return Metric.findByParentMetricId(parentMetricId, order, page, limit, context);
 	}
 
-	public Metric updateMetric(String id, String name, String description, String query, Integer color) {
+	public Metric updateMetric(String id, String name, String description, MetricQuery query, Integer color) {
 		return Metric.update(id, name, description, query, color, context);
 	}
 
@@ -116,7 +119,7 @@ public class GrowthAnalytics {
 		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, onlyLeaf, context);
 	}
 
-	public Segment updateSegment(String id, String name, String description, String query) {
+	public Segment updateSegment(String id, String name, String description, SegmentQuery query) {
 		return Segment.update(id, name, description, query, context);
 	}
 

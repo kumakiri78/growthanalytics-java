@@ -7,15 +7,17 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.analytics.query.metric.MetricQuery;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.JsonUtils;
 
 public class Metric extends Model {
 
 	private String id;
 	private String name;
 	private String description;
-	private String query;
+	private MetricQuery query;
 	private Integer color;
 	private Date created;
 
@@ -36,12 +38,12 @@ public class Metric extends Model {
 		});
 	}
 
-	public static Metric update(String id, String name, String description, String query, Integer color, Context context) {
+	public static Metric update(String id, String name, String description, MetricQuery query, Integer color, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
 		params.put("description", description);
 		if (query != null)
-			params.put("query", query);
+			params.put("query", JsonUtils.serialize(query));
 		if (color != null)
 			params.put("color", color);
 		return put(context, "/1/metrics/" + id, params, Metric.class);
@@ -75,11 +77,11 @@ public class Metric extends Model {
 		this.description = description;
 	}
 
-	public String getQuery() {
+	public MetricQuery getQuery() {
 		return query;
 	}
 
-	public void setQuery(String query) {
+	public void setQuery(MetricQuery query) {
 		this.query = query;
 	}
 
