@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class FilterFilterQuery extends FilterQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String filterId;
 
 	public FilterFilterQuery() {

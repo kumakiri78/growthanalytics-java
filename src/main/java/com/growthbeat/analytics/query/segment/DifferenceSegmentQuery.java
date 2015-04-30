@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class DifferenceSegmentQuery extends SegmentQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private List<? extends SegmentQuery> segmentQueries;
 
 	public DifferenceSegmentQuery() {

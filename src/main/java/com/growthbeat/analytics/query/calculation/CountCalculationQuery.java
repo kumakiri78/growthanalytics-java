@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(using = JsonDeserializer.None.class)
-public class UniqueCountCalculationQuery extends CalculationQuery {
+public class CountCalculationQuery extends CalculationQuery {
 
-	public UniqueCountCalculationQuery() {
+	private static final long serialVersionUID = 1L;
+
+	public CountCalculationQuery() {
 		super();
-		setType(CalculationQueryType.unique);
+		setType(CalculationQueryType.count);
 	}
 
 }

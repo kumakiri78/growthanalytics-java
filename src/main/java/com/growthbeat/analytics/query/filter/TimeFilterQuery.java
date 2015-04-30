@@ -9,6 +9,8 @@ import com.growthbeat.constants.Constants;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class TimeFilterQuery extends FilterQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.ISO_8601_DATETIME_FORMAT)
 	private TimeQuery begin;
 

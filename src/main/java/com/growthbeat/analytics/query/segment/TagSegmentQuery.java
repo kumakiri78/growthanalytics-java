@@ -7,6 +7,8 @@ import com.growthbeat.analytics.query.Operator;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class TagSegmentQuery extends SegmentQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String tagId;
 
 	private Operator operator;
