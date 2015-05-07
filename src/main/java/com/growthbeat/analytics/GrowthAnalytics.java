@@ -120,8 +120,8 @@ public class GrowthAnalytics {
 		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, onlyLeaf, context);
 	}
 
-	public Set<String> findClientIdsBySegmentQuery(SegmentQuery segmentQuery) {
-		return Segment.findClientIdsBySegmentQuery(segmentQuery, context);
+	public Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery) {
+		return Segment.findClientIdsBySegmentQuery(applicationId, segmentQuery, context);
 	}
 
 	public Segment updateSegment(String id, String name, String description, SegmentQuery query) {

@@ -42,9 +42,12 @@ public class Segment extends Model {
 		});
 	}
 
-	public static Set<String> findClientIdsBySegmentQuery(SegmentQuery segmentQuery, Context context) {
+	public static Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("segmentQuery", JsonUtils.serialize(segmentQuery));
+		if (applicationId != null)
+			params.put("applicationId", applicationId);
+		if (segmentQuery != null)
+			params.put("segmentQuery", JsonUtils.serialize(segmentQuery));
 		return get(context, "/1/segments/client_ids", params, new TypeReference<Set<String>>() {
 		});
 	}
