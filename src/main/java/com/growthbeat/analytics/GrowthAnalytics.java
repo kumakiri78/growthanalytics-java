@@ -3,6 +3,7 @@ package com.growthbeat.analytics;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.Application;
@@ -125,8 +126,16 @@ public class GrowthAnalytics {
 		return Segment.findByParentSegmentId(parentSegmentId, order, page, limit, onlyLeaf, context);
 	}
 
+	public Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery) {
+		return Segment.findClientIdsBySegmentQuery(applicationId, segmentQuery, context);
+	}
+
 	public Segment updateSegment(String id, String name, String description, SegmentQuery query) {
 		return Segment.update(id, name, description, query, context);
+	}
+
+	public Segment updateSegmentSize(String id) {
+		return Segment.updateSize(id, context);
 	}
 
 	public void deleteSegmentById(String id) {

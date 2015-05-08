@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
@@ -17,6 +18,7 @@ public class Segment extends Model {
 	private String id;
 	private String name;
 	private String description;
+	private int size;
 	private SegmentQuery query;
 	private Date created;
 
@@ -40,6 +42,16 @@ public class Segment extends Model {
 		});
 	}
 
+	public static Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (applicationId != null)
+			params.put("applicationId", applicationId);
+		if (segmentQuery != null)
+			params.put("segmentQuery", JsonUtils.serialize(segmentQuery));
+		return get(context, "/1/segments/client_ids", params, new TypeReference<Set<String>>() {
+		});
+	}
+
 	public static Segment update(String id, String name, String description, SegmentQuery query, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
@@ -47,6 +59,11 @@ public class Segment extends Model {
 		if (query != null)
 			params.put("query", JsonUtils.serialize(query));
 		return put(context, "/1/segments/" + id, params, Segment.class);
+	}
+
+	public static Segment updateSize(String id, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		return put(context, "/1/segments/" + id + "/size", params, Segment.class);
 	}
 
 	public static void deleteById(String id, Context context) {
@@ -75,6 +92,14 @@ public class Segment extends Model {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 	public SegmentQuery getQuery() {
