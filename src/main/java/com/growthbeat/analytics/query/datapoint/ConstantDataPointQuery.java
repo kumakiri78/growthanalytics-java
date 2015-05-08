@@ -9,6 +9,8 @@ import com.growthbeat.analytics.model.DataPoint;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class ConstantDataPointQuery extends DataPointQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	List<DataPoint> dataPoints;
 
 	public ConstantDataPointQuery() {

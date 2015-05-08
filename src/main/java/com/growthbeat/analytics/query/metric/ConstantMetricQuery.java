@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class ConstantMetricQuery extends MetricQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private double value;
 
 	public ConstantMetricQuery() {

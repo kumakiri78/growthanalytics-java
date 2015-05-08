@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class ApplicationSegmentQuery extends SegmentQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String applicationId;
 
 	public ApplicationSegmentQuery() {

@@ -39,9 +39,9 @@ public class JsonCalculationQueryDeserializer extends JsonDeserializer<Calculati
 
 		switch (type) {
 		case count:
-			return JsonUtils.deserialize(json, TotalCountCalculationQuery.class);
+			return JsonUtils.deserialize(json, CountCalculationQuery.class);
 		case unique:
-			return JsonUtils.deserialize(json, UniqueCountCalculationQuery.class);
+			return JsonUtils.deserialize(json, UniqueCalculationQuery.class);
 		case sum:
 			return JsonUtils.deserialize(json, SumCalculationQuery.class);
 		case max:

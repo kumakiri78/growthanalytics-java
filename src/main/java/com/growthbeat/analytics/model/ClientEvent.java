@@ -9,9 +9,11 @@ import org.apache.http.client.utils.DateUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
+import com.growthbeat.analytics.query.filter.FilterQuery;
 import com.growthbeat.constants.Constants;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.JsonUtils;
 
 public class ClientEvent extends Model {
 
@@ -20,6 +22,24 @@ public class ClientEvent extends Model {
 	private String eventId;
 	private Map<String, String> properties;
 	private Date created;
+
+	public static List<ClientEvent> findByEventId(String eventId, Date begin, Date end, String exclusiveId, Order order,
+			FilterQuery filterQuery, Integer limit, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("eventId", eventId);
+		params.put("begin", DateUtils.formatDate(begin, Constants.ISO_8601_DATETIME_FORMAT));
+		params.put("end", DateUtils.formatDate(end, Constants.ISO_8601_DATETIME_FORMAT));
+		if (exclusiveId != null)
+			params.put("exclusiveId", exclusiveId);
+		if (order != null)
+			params.put("order", order.toString());
+		if (filterQuery != null)
+			params.put("filterQuery", JsonUtils.serialize(filterQuery));
+		if (limit != null)
+			params.put("limit", limit);
+		return get(context, "/1/client_events", params, new TypeReference<List<ClientEvent>>() {
+		});
+	}
 
 	public static List<ClientEvent> findByClientIdAndEventId(String clientId, String eventId, Date begin, Date end, String exclusiveId,
 			Order order, Integer limit, Context context) {

@@ -6,6 +6,8 @@ import com.growthbeat.analytics.query.BaseQuery;
 @JsonDeserialize(using = JsonSegmentQueryDeserializer.class)
 public abstract class SegmentQuery extends BaseQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	protected SegmentQueryType type;
 
 	public SegmentQueryType getType() {

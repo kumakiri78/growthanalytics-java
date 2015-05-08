@@ -6,6 +6,8 @@ import com.growthbeat.analytics.query.BaseQuery;
 @JsonDeserialize(using = JsonDataPointQueryDeserializer.class)
 public abstract class DataPointQuery extends BaseQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private DataPointQueryType type;
 
 	private String name;

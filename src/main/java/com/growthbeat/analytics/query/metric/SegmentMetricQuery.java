@@ -7,6 +7,8 @@ import com.growthbeat.analytics.query.segment.SegmentQuery;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class SegmentMetricQuery extends MetricQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private SegmentQuery segmentQuery;
 
 	public SegmentMetricQuery() {

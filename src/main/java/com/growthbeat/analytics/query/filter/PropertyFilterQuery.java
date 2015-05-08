@@ -7,6 +7,8 @@ import com.growthbeat.analytics.query.Operator;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class PropertyFilterQuery extends FilterQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String property;
 
 	private Operator operator;

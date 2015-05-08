@@ -6,6 +6,8 @@ import com.growthbeat.analytics.query.BaseQuery;
 @JsonDeserialize(using = JsonTimeQueryDeserializer.class)
 public abstract class TimeQuery extends BaseQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private TimeQueryType type;
 
 	public TimeQueryType getType() {

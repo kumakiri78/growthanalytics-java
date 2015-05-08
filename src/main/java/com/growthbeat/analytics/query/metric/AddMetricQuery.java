@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class AddMetricQuery extends MetricQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private List<? extends MetricQuery> metricQueries;
 
 	public AddMetricQuery() {

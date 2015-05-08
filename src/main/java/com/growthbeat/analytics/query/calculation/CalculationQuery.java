@@ -6,6 +6,8 @@ import com.growthbeat.analytics.query.BaseQuery;
 @JsonDeserialize(using = JsonCalculationQueryDeserializer.class)
 public abstract class CalculationQuery extends BaseQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private CalculationQueryType type;
 
 	public CalculationQueryType getType() {

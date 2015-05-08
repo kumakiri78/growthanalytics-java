@@ -6,6 +6,8 @@ import com.growthbeat.analytics.query.BaseQuery;
 @JsonDeserialize(using = JsonMetricQueryDeserializer.class)
 public abstract class MetricQuery extends BaseQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	protected MetricQueryType type;
 
 	protected MetricQueryDirection direction = MetricQueryDirection.up;

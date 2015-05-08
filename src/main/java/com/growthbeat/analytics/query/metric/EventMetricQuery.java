@@ -8,6 +8,8 @@ import com.growthbeat.analytics.query.filter.FilterQuery;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class EventMetricQuery extends MetricQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String eventId;
 
 	private CalculationQuery calculationQuery;

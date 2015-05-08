@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = JsonDeserializer.None.class)
 public class SumCalculationQuery extends CalculationQuery {
 
+	private static final long serialVersionUID = 1L;
+
 	private String property;
 
 	public SumCalculationQuery() {
