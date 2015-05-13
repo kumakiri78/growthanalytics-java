@@ -106,8 +106,8 @@ public class GrowthAnalytics {
 		return Metric.findById(id, context);
 	}
 
-	public List<Metric> findMetricsByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit) {
-		return Metric.findByParentMetricId(parentMetricId, order, page, limit, context);
+	public List<Metric> findMetricsByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit, Boolean onlyLeaf) {
+		return Metric.findByParentMetricId(parentMetricId, order, page, limit, onlyLeaf, context);
 	}
 
 	public Metric updateMetric(String id, String name, String description, MetricQuery query, Integer color) {
@@ -146,8 +146,8 @@ public class GrowthAnalytics {
 		return Tag.findById(id, context);
 	}
 
-	public List<Tag> findTagsByParentTagId(String parentTagId, Order order, Integer page, Integer limit) {
-		return Tag.findByParentTagId(parentTagId, order, page, limit, context);
+	public List<Tag> findTagsByParentTagId(String parentTagId, Order order, Integer page, Integer limit, Boolean onlyLeaf) {
+		return Tag.findByParentTagId(parentTagId, order, page, limit, onlyLeaf, context);
 	}
 
 	public Tag updateTag(String id, String name, String description) {
