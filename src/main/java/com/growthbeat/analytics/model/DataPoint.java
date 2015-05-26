@@ -18,13 +18,14 @@ public class DataPoint extends Model {
 	private String category;
 	private String value;
 
-	public static List<DataPoint> findByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, Context context) {
+	public static List<DataPoint> findByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, boolean cacheable, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("dataPointQuery", JsonUtils.serialize(dataPointQuery));
 		if (begin != null)
 			params.put("begin", DateUtils.dateTimeStringFromDateWithFormat(begin, Constants.ISO_8601_DATETIME_FORMAT));
 		if (end != null)
 			params.put("end", DateUtils.dateTimeStringFromDateWithFormat(end, Constants.ISO_8601_DATETIME_FORMAT));
+		params.put("cacheable", cacheable);
 
 		return get(context, "/1/data_points", params, new TypeReference<List<DataPoint>>() {
 		});
