@@ -21,7 +21,7 @@ public class Tag extends Model {
 		return get(context, "/1/tags/" + id, new HashMap<String, Object>(), Tag.class);
 	}
 
-	public static List<Tag> findByParentTagId(String parentTagId, Order order, Integer page, Integer limit, Context context) {
+	public static List<Tag> findByParentTagId(String parentTagId, Order order, Integer page, Integer limit, Boolean onlyLeaf, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentTagId", parentTagId);
 		if (order != null)
@@ -30,6 +30,8 @@ public class Tag extends Model {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
+		if (onlyLeaf != null)
+			params.put("onlyLeaf", onlyLeaf);
 		return get(context, "/1/tags", params, new TypeReference<List<Tag>>() {
 		});
 	}
