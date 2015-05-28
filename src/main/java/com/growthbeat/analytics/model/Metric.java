@@ -25,7 +25,7 @@ public class Metric extends Model {
 		return get(context, "/1/metrics/" + id, new HashMap<String, Object>(), Metric.class);
 	}
 
-	public static List<Metric> findByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit, Context context) {
+	public static List<Metric> findByParentMetricId(String parentMetricId, Order order, Integer page, Integer limit, Boolean onlyLeaf, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("parentMetricId", parentMetricId);
 		if (order != null)
@@ -34,6 +34,8 @@ public class Metric extends Model {
 			params.put("page", page);
 		if (limit != null)
 			params.put("limit", limit);
+		if (onlyLeaf != null)
+			params.put("onlyLeaf", onlyLeaf);
 		return get(context, "/1/metrics", params, new TypeReference<List<Metric>>() {
 		});
 	}
