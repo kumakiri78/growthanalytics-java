@@ -58,8 +58,8 @@ public class GrowthAnalytics {
 		return ClientEvent.findByClientIdAndEventId(clientId, eventId, begin, end, exclusiveId, order, limit, context);
 	}
 
-	public ClientEvent createClientEvent(String clientId, String eventId, Map<String, String> properties) {
-		return ClientEvent.create(clientId, eventId, properties, context);
+	public ClientEvent createClientEvent(String clientId, String eventId, Map<String, String> properties, Date created) {
+		return ClientEvent.create(clientId, eventId, properties, created, context);
 	}
 
 	public ClientSegment findClientSegmentByClientIdAndSegmentId(String clientId, String segmentId) {

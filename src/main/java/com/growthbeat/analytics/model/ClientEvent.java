@@ -58,7 +58,7 @@ public class ClientEvent extends Model {
 		});
 	}
 
-	public static ClientEvent create(String clientId, String eventId, Map<String, String> properties, Context context) {
+	public static ClientEvent create(String clientId, String eventId, Map<String, String> properties, Date created, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientId", clientId);
 		params.put("eventId", eventId);
@@ -67,6 +67,7 @@ public class ClientEvent extends Model {
 				params.put(String.format("properties[%s]", entry.getKey()), entry.getValue());
 			}
 		}
+		params.put("created", DateUtils.formatDate(created, Constants.ISO_8601_DATETIME_FORMAT));
 		return post(context, "/1/client_events", params, ClientEvent.class);
 	}
 
