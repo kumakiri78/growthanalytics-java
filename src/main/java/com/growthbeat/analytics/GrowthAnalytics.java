@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.Application;
-import com.growthbeat.analytics.model.AsyncApiResponse;
+import com.growthbeat.analytics.model.AsyncApiJob;
 import com.growthbeat.analytics.model.ClientEvent;
 import com.growthbeat.analytics.model.ClientEventRequest;
 import com.growthbeat.analytics.model.ClientSegment;
@@ -65,7 +65,7 @@ public class GrowthAnalytics {
 		return ClientEvent.create(clientId, eventId, properties, created, context);
 	}
 
-	public AsyncApiResponse bulkCreateClientEvent(List<ClientEventRequest> clientEventRequests) {
+	public AsyncApiJob bulkCreateClientEvent(List<ClientEventRequest> clientEventRequests) {
 		return ClientEvent.bulkCreate(clientEventRequests, context);
 	}
 
@@ -89,7 +89,7 @@ public class GrowthAnalytics {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
 
-	public AsyncApiResponse bulkCreateClientTag(List<ClientTagRequest> clientTagRequests) {
+	public AsyncApiJob bulkCreateClientTag(List<ClientTagRequest> clientTagRequests) {
 		return ClientTag.bulkCreate(clientTagRequests, context);
 	}
 
@@ -167,6 +167,10 @@ public class GrowthAnalytics {
 
 	public void deleteTagById(String id) {
 		Tag.deleteById(id, context);
+	}
+
+	public AsyncApiJob findAsyncApiJobById(String id) {
+		return AsyncApiJob.findById(id, context);
 	}
 
 }

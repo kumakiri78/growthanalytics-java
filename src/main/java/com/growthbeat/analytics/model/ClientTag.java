@@ -50,10 +50,10 @@ public class ClientTag extends Model {
 		return post(context, "/1/client_tags", params, ClientTag.class);
 	}
 
-	public static AsyncApiResponse bulkCreate(List<ClientTagRequest> clientTagRequests, Context context) {
+	public static AsyncApiJob bulkCreate(List<ClientTagRequest> clientTagRequests, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("clientTagRequests", JsonUtils.serialize(clientTagRequests));
-		return post(context, "/1/client_tags/bulk", params, AsyncApiResponse.class);
+		return post(context, "/1/client_tags/bulk", params, AsyncApiJob.class);
 	}
 	
 	public String getClientId() {
