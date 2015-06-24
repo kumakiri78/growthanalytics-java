@@ -12,6 +12,7 @@ import com.growthbeat.analytics.model.ClientEvent;
 import com.growthbeat.analytics.model.ClientEventRequest;
 import com.growthbeat.analytics.model.ClientSegment;
 import com.growthbeat.analytics.model.ClientTag;
+import com.growthbeat.analytics.model.ClientTagRequest;
 import com.growthbeat.analytics.model.DataPoint;
 import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
@@ -86,6 +87,10 @@ public class GrowthAnalytics {
 
 	public ClientTag createClientTag(String clientId, String tagId, String value) {
 		return ClientTag.create(clientId, tagId, value, context);
+	}
+
+	public AsyncApiResponse bulkCreateClientTag(List<ClientTagRequest> clientTagRequests) {
+		return ClientTag.bulkCreate(clientTagRequests, context);
 	}
 
 	public List<DataPoint> findDataPointsByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, boolean cacheable) {

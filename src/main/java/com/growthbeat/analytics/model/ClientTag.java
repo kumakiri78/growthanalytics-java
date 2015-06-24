@@ -8,6 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
 import com.growthbeat.model.Model;
+import com.growthbeat.utils.JsonUtils;
 
 public class ClientTag extends Model {
 
@@ -49,6 +50,12 @@ public class ClientTag extends Model {
 		return post(context, "/1/client_tags", params, ClientTag.class);
 	}
 
+	public static AsyncApiResponse bulkCreate(List<ClientTagRequest> clientTagRequests, Context context) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("clientTagRequests", JsonUtils.serialize(clientTagRequests));
+		return post(context, "/1/client_tags/bulk", params, AsyncApiResponse.class);
+	}
+	
 	public String getClientId() {
 		return clientId;
 	}
