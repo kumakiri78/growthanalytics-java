@@ -7,7 +7,9 @@ import java.util.Set;
 
 import com.growthbeat.Context;
 import com.growthbeat.analytics.model.Application;
+import com.growthbeat.analytics.model.AsyncApiResponse;
 import com.growthbeat.analytics.model.ClientEvent;
+import com.growthbeat.analytics.model.ClientEventRequest;
 import com.growthbeat.analytics.model.ClientSegment;
 import com.growthbeat.analytics.model.ClientTag;
 import com.growthbeat.analytics.model.DataPoint;
@@ -60,6 +62,10 @@ public class GrowthAnalytics {
 
 	public ClientEvent createClientEvent(String clientId, String eventId, Map<String, String> properties, Date created) {
 		return ClientEvent.create(clientId, eventId, properties, created, context);
+	}
+
+	public AsyncApiResponse bulkCreateClientEvent(List<ClientEventRequest> clientEventRequests) {
+		return ClientEvent.bulkCreate(clientEventRequests, context);
 	}
 
 	public ClientSegment findClientSegmentByClientIdAndSegmentId(String clientId, String segmentId) {
