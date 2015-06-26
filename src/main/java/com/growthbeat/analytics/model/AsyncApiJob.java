@@ -2,31 +2,28 @@ package com.growthbeat.analytics.model;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import com.growthbeat.Context;
 import com.growthbeat.model.Model;
 
 public class AsyncApiJob extends Model {
 
-	private String jobId;
+	private String id;
 	private AsyncApiStatus status;
 	private String error;
 	private Date created;
 	private Date updated;
 
-	public static AsyncApiJob findById(String id, String applicationId, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("applicationId", applicationId);
-		return get(context, "/1/jobs/" + id, params, AsyncApiJob.class);
+	public static AsyncApiJob findById(String id, Context context) {
+		return get(context, "/1/jobs/" + id, new HashMap<String, Object>(), AsyncApiJob.class);
 	}
 
-	public String getJobId() {
-		return jobId;
+	public String getId() {
+		return id;
 	}
 
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
+	public void setJobId(String id) {
+		this.id = id;
 	}
 
 	public AsyncApiStatus getStatus() {

@@ -169,8 +169,8 @@ public class GrowthAnalytics {
 		Tag.deleteById(id, context);
 	}
 
-	public AsyncApiJob findAsyncApiJobById(String applicationId, String jobId) {
-		return AsyncApiJob.findById(jobId, applicationId, context);
+	public AsyncApiJob findAsyncApiJobById(String id) {
+		return AsyncApiJob.findById(id, context);
 	}
 
 }
