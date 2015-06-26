@@ -65,8 +65,8 @@ public class GrowthAnalytics {
 		return ClientEvent.create(clientId, eventId, properties, created, context);
 	}
 
-	public AsyncApiJob bulkCreateClientEvent(List<ClientEventRequest> clientEventRequests) {
-		return ClientEvent.bulkCreate(clientEventRequests, context);
+	public AsyncApiJob bulkCreateClientEvent(String applicationId, List<ClientEventRequest> clientEventRequests) {
+		return ClientEventRequest.bulkCreate(applicationId, clientEventRequests, context);
 	}
 
 	public ClientSegment findClientSegmentByClientIdAndSegmentId(String clientId, String segmentId) {
@@ -89,8 +89,8 @@ public class GrowthAnalytics {
 		return ClientTag.create(clientId, tagId, value, context);
 	}
 
-	public AsyncApiJob bulkCreateClientTag(List<ClientTagRequest> clientTagRequests) {
-		return ClientTag.bulkCreate(clientTagRequests, context);
+	public AsyncApiJob bulkCreateClientTag(String applicationId, List<ClientTagRequest> clientTagRequests) {
+		return ClientTagRequest.bulkCreate(applicationId, clientTagRequests, context);
 	}
 
 	public List<DataPoint> findDataPointsByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, boolean cacheable) {

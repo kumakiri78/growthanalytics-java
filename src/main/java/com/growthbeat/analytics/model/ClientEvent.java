@@ -71,12 +71,6 @@ public class ClientEvent extends Model {
 		return post(context, "/1/client_events", params, ClientEvent.class);
 	}
 
-	public static AsyncApiJob bulkCreate(List<ClientEventRequest> clientEventRequests, Context context) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("clientEventRequests", JsonUtils.serialize(clientEventRequests));
-		return post(context, "/1/client_events/bulk", params, AsyncApiJob.class);
-	}
-
 	public String getId() {
 		return id;
 	}
