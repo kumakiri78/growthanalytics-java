@@ -74,8 +74,8 @@ public class GrowthAnalytics {
 		return ClientTag.findByClientId(clientId, context);
 	}
 
-	public List<ClientTag> findClientTagsByTagId(String tagId, Integer limit ) {
-		return ClientTag.findByTagId(tagId, limit, context);
+	public List<ClientTag> findClientTagsByTagId(String tagId, String exclusiveClientId, Order order, Integer limit) {
+		return ClientTag.findByTagId(tagId, exclusiveClientId, order, limit, context);
 	}
 
 	public ClientTag createClientTag(String clientId, String tagId, String value) {
