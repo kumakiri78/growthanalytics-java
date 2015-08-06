@@ -8,6 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
 import com.growthbeat.model.Model;
+import com.growthbeat.model.Order;
 
 public class ClientTag extends Model {
 
@@ -32,10 +33,16 @@ public class ClientTag extends Model {
 		});
 	}
 
-	public static List<ClientTag> findByTagId(String tagId, Context context) {
+	public static List<ClientTag> findByTagId(String tagId, String exclusiveClientId, Order order, Integer limit, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("tagId", tagId);
-
+		if (exclusiveClientId != null)
+			params.put("exclusiveId", exclusiveClientId);
+		if (order != null)
+			params.put("order", order.toString());
+		if (limit != null)
+			params.put("limit", limit);
+	
 		return get(context, "/1/client_tags", params, new TypeReference<List<ClientTag>>() {
 		});
 	}
