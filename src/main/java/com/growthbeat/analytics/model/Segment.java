@@ -9,8 +9,10 @@ import java.util.Set;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
 import com.growthbeat.analytics.query.segment.SegmentQuery;
+import com.growthbeat.constants.Constants;
 import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.DateUtils;
 import com.growthbeat.utils.JsonUtils;
 
 public class Segment extends Model {
@@ -42,12 +44,20 @@ public class Segment extends Model {
 		});
 	}
 
-	public static Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery, Context context) {
+	public static Set<String> findClientIdsBySegmentQuery(String applicationId, SegmentQuery segmentQuery,
+			Date begin, Date end, boolean cacheable, Context context) {
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (applicationId != null)
 			params.put("applicationId", applicationId);
 		if (segmentQuery != null)
 			params.put("segmentQuery", JsonUtils.serialize(segmentQuery));
+		if (begin != null)
+			params.put("begin", DateUtils.dateTimeStringFromDateWithFormat(begin, Constants.ISO_8601_DATETIME_FORMAT));
+		if (end != null)
+			params.put("end", DateUtils.dateTimeStringFromDateWithFormat(end, Constants.ISO_8601_DATETIME_FORMAT));
+		params.put("cacheable", cacheable);
+
 		return get(context, "/1/segments/client_ids", params, new TypeReference<Set<String>>() {
 		});
 	}
