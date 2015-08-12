@@ -7,7 +7,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.google.common.collect.Sets;
 
 public enum Operator {
-	equal, greater, less, greater_equal, less_equal, begin_with, exist, in;
+	equal, greater, less, greater_equal, less_equal, begin_with, like, exist, in;
 
 	private static final Set<Operator> NUMBER_COMPARABLE_OPERATORS = Sets.immutableEnumSet(equal, greater, less, greater_equal, less_equal);
 
@@ -32,11 +32,12 @@ public enum Operator {
 			return (string.compareTo(targetString) <= 0);
 		case begin_with:
 			return string.startsWith(targetString);
+		case like:
+			return string.contains(targetString);
 		case exist:
 			return (string != null);
 		case in:
-			// TODO implement
-			throw new IllegalStateException();
+			return evaluateInQuery(string, targetString);
 		default:
 			throw new IllegalStateException();
 		}
@@ -57,12 +58,34 @@ public enum Operator {
 		case less_equal:
 			return (number <= targetNumber);
 		case begin_with:
+		case like:
 		case exist:
 		case in:
 		default:
 			throw new IllegalStateException();
 		}
 
+	}
+
+	private boolean evaluateInQuery(String value, String inValues) {
+		String escapedValue = escapeComma(value);
+
+		for (String splited : convertEscapedComma(inValues).split(",")) {
+			if (splited.equals(escapedValue))
+				return true;
+		}
+
+		return false;
+
+	}
+
+	private String escapeComma(String src) {
+		return src.replace(",", "{{esc_com}}");
+	}
+
+	private String convertEscapedComma(String src) {
+		return src.replace("\\\\", "{{esc_dbs}}").replace("\\,", "{{esc_com}}")
+				.replace("{{esc_dbs}}", "\\");
 	}
 
 }
