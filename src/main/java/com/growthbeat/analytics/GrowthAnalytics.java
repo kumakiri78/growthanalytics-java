@@ -10,6 +10,7 @@ import com.growthbeat.analytics.model.Application;
 import com.growthbeat.analytics.model.ClientEvent;
 import com.growthbeat.analytics.model.ClientSegment;
 import com.growthbeat.analytics.model.ClientTag;
+import com.growthbeat.analytics.model.ClientTags;
 import com.growthbeat.analytics.model.DataPoint;
 import com.growthbeat.analytics.model.Event;
 import com.growthbeat.analytics.model.Metric;
@@ -23,7 +24,7 @@ import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
 
-	private static final String BASE_URL = "https://api.analytics.growthbeat.com";
+	private static final String BASE_URL = "https://api.stg.analytics.growthbeat.com";
 	private Context context = new Context();
 
 	public GrowthAnalytics() {
@@ -80,6 +81,10 @@ public class GrowthAnalytics {
 
 	public ClientTag createClientTag(String clientId, String tagId, String value) {
 		return ClientTag.create(clientId, tagId, value, context);
+	}
+
+	public ClientTags createClientTags(String[] clientIds, String tagId, String value) {
+		return ClientTags.create(clientIds, tagId, value, context);
 	}
 
 	public List<DataPoint> findDataPointsByDataPointQuery(DataPointQuery dataPointQuery, Date begin, Date end, boolean cacheable) {
