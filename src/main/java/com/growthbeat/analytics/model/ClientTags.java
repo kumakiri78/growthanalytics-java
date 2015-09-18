@@ -39,13 +39,19 @@ public class ClientTags extends Model {
 			}
 
 			Output output = new Output(byteArrayOutputStream);
-			new Kryo().writeObject(output, json);
+			try {
+				new Kryo().writeObject(output, json);
+			} finally {
+				output.close();
+			}
+
 			params.put("clientTags", new String(byteArrayOutputStream.toByteArray(), "UTF-8"));
 
 		} catch (IOException e) {
 			logger.error("Can not create ClientTags. ", e);
 			return null;
 		}
+
 		System.out.println("<< URI >>:" + context.getGrowthbeatHttpClient().getBaseUrl()+"/1/client_tags/bulk_insert");
 		return post(context, "/1/client_tags/bulk_insert", params, ClientTags.class);
 	}
