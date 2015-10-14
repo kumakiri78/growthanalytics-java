@@ -23,7 +23,7 @@ import com.growthbeat.model.Order;
 
 public class GrowthAnalytics {
 
-	private static final String BASE_URL = "https://api.stg.analytics.growthbeat.com";
+	private static final String BASE_URL = "https://api.analytics.growthbeat.com";
 	private Context context = new Context();
 
 	public GrowthAnalytics() {
