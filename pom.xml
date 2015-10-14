@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.growthbeat.analytics</groupId>
 	<artifactId>growthanalytics-java</artifactId>
-	<version>0.1.11</version>
+	<version>0.1.12</version>
 
 	<properties>
 		<github.global.server>github</github.global.server>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.growthbeat</groupId>
 			<artifactId>growthbeat-java</artifactId>
-			<version>1.0.11</version>
+			<version>1.0.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
