@@ -7,10 +7,10 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
-import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
+import com.growthbeat.utils.JsonUtils;
 
-public class ClientTag extends Model {
+public class ClientTag extends ClientRequest {
 
 	private String clientId;
 	private String tagId;
@@ -86,6 +86,11 @@ public class ClientTag extends Model {
 
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+
+	@Override
+	public ClientRequestType getType() {
+		return ClientRequestType.ClientTag;
 	}
 
 }

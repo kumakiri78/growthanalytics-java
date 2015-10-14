@@ -11,11 +11,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.growthbeat.Context;
 import com.growthbeat.analytics.query.filter.FilterQuery;
 import com.growthbeat.constants.Constants;
-import com.growthbeat.model.Model;
 import com.growthbeat.model.Order;
 import com.growthbeat.utils.JsonUtils;
 
-public class ClientEvent extends Model {
+public class ClientEvent extends ClientRequest {
 
 	private String id;
 	private String clientId;
@@ -110,4 +109,8 @@ public class ClientEvent extends Model {
 		this.created = created;
 	}
 
+	@Override
+	public ClientRequestType getType() {
+		return ClientRequestType.ClientEvent;
+	}
 }
