@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.growthbeat.analytics</groupId>
 	<artifactId>growthanalytics-java</artifactId>
-	<version>0.1.11</version>
+	<version>0.1.12</version>
 
 	<properties>
 		<github.global.server>github</github.global.server>
@@ -99,10 +99,24 @@
 			<artifactId>logback-core</artifactId>
 			<version>${ch.qos.logback-version}</version>
 		</dependency>
+        <dependency>
+            <groupId>com.esotericsoftware.kryo</groupId>
+            <artifactId>kryo</artifactId>
+            <version>2.24.0</version>
+        </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+            <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <version>3.0</version>
+	            <configuration>
+	                <source>1.7</source>
+	                <target>1.7</target>
+	            </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
