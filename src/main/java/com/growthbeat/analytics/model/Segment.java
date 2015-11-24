@@ -62,6 +62,23 @@ public class Segment extends Model {
 		});
 	}
 
+	public static Set<String> findClientIdsByRealtimeSegmentQuery(String applicationId, SegmentQuery segmentQuery,
+			Date begin, Date end, Context context) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (applicationId != null)
+			params.put("applicationId", applicationId);
+		if (segmentQuery != null)
+			params.put("segmentQuery", JsonUtils.serialize(segmentQuery));
+		if (begin != null)
+			params.put("begin", DateUtils.dateTimeStringFromDateWithFormat(begin, Constants.ISO_8601_DATETIME_FORMAT));
+		if (end != null)
+			params.put("end", DateUtils.dateTimeStringFromDateWithFormat(end, Constants.ISO_8601_DATETIME_FORMAT));
+		
+		return get(context, "/1/segments/realtime_client_ids", params, new TypeReference<Set<String>>() {
+		});
+	}
+
 	public static Segment update(String id, String name, String description, SegmentQuery query, Context context) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", name);
