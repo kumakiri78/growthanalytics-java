@@ -130,6 +130,10 @@ public class GrowthAnalytics {
 		return Segment.findClientIdsBySegmentQuery(applicationId, segmentQuery, begin, end, cacheable, context);
 	}
 
+	public Set<String> findClientIdsByRealtimeSegmentQuery(String applicationId, SegmentQuery segmentQuery, Date begin, Date end, boolean cacheable) {
+		return Segment.findClientIdsByRealtimeSegmentQuery(applicationId, segmentQuery, begin, end, context);
+	}
+	
 	public Segment updateSegment(String id, String name, String description, SegmentQuery query) {
 		return Segment.update(id, name, description, query, context);
 	}
